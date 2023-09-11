@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthenticationController;
 
 /*
@@ -26,5 +28,7 @@ Route::prefix('admin')->name('admin.')->group(function(){
 
     Route::middleware(['auth:web', 'disableBackButton'])->group(function(){
         Route::get('/dashboard', function(){ return view('admin.pages.dashboard'); })->name('dashboard');
+        Route::resource('/users', UserController::class);
+        Route::resource('/roles', RoleController::class);
     });
 });
